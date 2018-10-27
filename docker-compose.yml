@@ -1,5 +1,14 @@
 version: '2'
 services:
+  reverse-proxy:
+    image: traefik # The official Traefik docker image
+    command: --api --docker # Enables the web UI and tells Traefik to listen to docker
+    ports:
+      - "80:80"     # The HTTP port
+      - "8080:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+      - /home/andreja/Desktop/node_and_react/traefik.toml:/traefik.toml
   server:
     build:
       context: ./server/
@@ -8,7 +17,7 @@ services:
       - ./server/:/usr/app
       - /usr/app/node_modules
     ports:
-      - "8080:8080"
+      - "8081:8081"
     # env_file: ./server/.env # TODO - uncomment this to auto-load your .env file!
     environment:
       - NODE_ENV=development
