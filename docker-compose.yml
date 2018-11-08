@@ -34,4 +34,5 @@ services:
     ports:
       - "3000:3000"
     labels:
-      - "traefik.frontend.rule=Host:nodeandreact_client_1.local"
+      - "traefik.frontend.rule=Host:client.local"
+      - "traefik.frontend.passHostHeader=false"
