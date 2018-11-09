@@ -35,4 +35,4 @@ services:
       - "3000:3000"
     labels:
       - "traefik.frontend.rule=Host:client.local"
-      - "traefik.frontend.passHostHeader=false"
+      - "traefik.frontend.passHostHeader=false" #some change, trying to trigger a build!
