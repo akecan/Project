@@ -15,7 +15,7 @@ const app = express();
 // Static files
 app.use(express.static(CLIENT_BUILD_PATH));
 
-// API
+// AP I
 //app.get('/api', (req, res) => {
   res.set('Content-Type', 'application/json');
   let data = {
