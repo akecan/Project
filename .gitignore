@@ -3,4 +3,6 @@ npm-debug.log
 client/src/compiled/
 server/.env
 *.tfvars
+*.tfstate
+*.tfstate.backup
 .terraform.tfstate.lock.info
