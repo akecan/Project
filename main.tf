@@ -108,28 +108,3 @@ resource "azurerm_virtual_machine" "myterraformvm" {
         environment = "Terraform Demo"
     }
 }
-
-#vm extension for docker - deprecated (got stuck here)
-resource "azurerm_virtual_machine_extension" "mydockerextension" {
-    name = "DockerExtension"
-    location = "westeurope"
-    resource_group_name = "${azurerm_resource_group.rg.name}"
-    virtual_machine_name = "${azurerm_virtual_machine.myterraformvm.name}"
-    publisher = "Microsoft.Azure.Extensions"
-    type="DockerExtension"
-    type_handler_version = "1.0"
-
-    //type="CustomScript"
-    //type_handler_version = "2.0"
-
-   /* settings = <<SETTINGS
-    {
-        "fileUris": [""],       //url for script to be downloaded-git repo
-        "commandToExecute": "hostname && uptime"   //komanda da se izvrsi skripta
-    }
-SETTINGS*/
-
-    tags {
-        environment = "Terraform Demo"
-    }
-}
