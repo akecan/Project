@@ -95,7 +95,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
         ssh_keys {
             path     = "/home/akecan/.ssh/authorized_keys"
             #key_data = "ssh-rsa AAAAB3Nz{snip}hwhqT9h"
-            key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC0VQV5p+f0kIMv/0HsJTspEldpCfWuaA+/gdR4b22d0KyKb5uVwkIkAaCRK8M/zFbP+zabFMLHuqs2uJWoWBhBLhNulU2RnTpjlUlz2Q9eadSbUi/rrFl3lJzftuF3icDNsIJwlIgK18t+LRGEmkwhXQonPfNfDQnOuQQuyEKVmmR2G7i9jYTNBFWf100WRahz0Gkn+SnAqMT0WHlXgHgmmvo4fy53EX3juPYiD/5gCP6CHcv9GBhAd267J8AK3HSO4MVndbKPMVYyOFzWlMujHDBhc81FIfVkimEwj3BERnNUZVc6b4ojmQXJEwmTRpoK7uSUEm5qRjrT+pseAXAx andreja@Andreja"
+            key_data = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNlhrWRlU4nVUgETDAoq2X9pRjOPQ5YjV4J6io+vOXfESpyGQjTh+13DwaFxf2Nyjtl6E9vWn80284bxKMZS5j18YrTHbcBSWFz9/m8v4i/Ofyn1GojVCEf3RulKk25S8Jd74Sjsn/5VVd97LC86kchzBp9sixdipnGVBCQavvl18ap1eHwUNdFzyPA7ohmnGVnVtoxTiuA6bAJ5leQHPXTK1tJRTxsH4oNRb9fVHN5Dr/T6t663l19qfU/Qox6XPLbEFuOQMva6wefqe4JBBoKAQRx6WSIfmzrTUpEpBQnOw0z2+8iQG3gatrM4RfxKFppj/MmtbfjIzRM2AhCF+R"//andreja@Andreja
         }
     }
 
@@ -103,6 +103,35 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     #    enabled     = "true"
     #    storage_uri = "${azurerm_storage_account.mystorageaccount.primary_blob_endpoint}"
     #}
+
+    tags {
+        environment = "Terraform Demo"
+    }
+}
+
+#vm extension for docker - deprecated (got stuck here), manualno instalirana novija verzija composea
+resource "azurerm_virtual_machine_extension" "mydockerextension" {
+    name = "DockerExtension"
+    location = "westeurope"
+    resource_group_name = "${azurerm_resource_group.rg.name}"
+    virtual_machine_name = "${azurerm_virtual_machine.myterraformvm.name}"
+    publisher = "Microsoft.Azure.Extensions"
+    type="DockerExtension"
+    type_handler_version = "1.0"
+    auto_upgrade_minor_version = true
+
+    //type="CustomScript"
+    //type_handler_version = "2.0"
+
+    //"fileUris": ["/home/andreja/Desktop/hello.sh"],
+    //url for script to be downloaded-git repo
+    //komanda da se izvrsi skripta
+    settings = <<SETTINGS
+    {
+        
+        "commandToExecute": "sudo dockerd"
+    }
+SETTINGS
 
     tags {
         environment = "Terraform Demo"

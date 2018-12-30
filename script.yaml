@@ -1,0 +1,11 @@
+---
+- hosts: linuxvm   #on which server to execute
+  remote_user: akecan
+  tasks:            #each task executes a module
+    - name: pull from github
+      git: 
+        repo: https://github.com/akecan/Project.git
+        dest: akecan/Project
+
+    - name: docker compose
+      shell: docker-compose up -d chdir=akecan/Project
