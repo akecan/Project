@@ -8,4 +8,4 @@
         dest: akecan/Project
 
     - name: docker compose
-      shell: docker-compose up -d chdir=akecan/Project
+      shell: docker-compose -f docker-compose.prod.yml up chdir=akecan/Project
