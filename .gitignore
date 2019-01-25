@@ -4,3 +4,6 @@ client/src/compiled/
 server/.env
 *.tfvars
 .terraform.tfstate.lock.info
+*.yaml.txt
+*.retry.txt
+

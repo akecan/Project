@@ -8,4 +8,15 @@
         dest: akecan/Project
 
     - name: docker compose
-      shell: docker-compose -f docker-compose.prod.yml up chdir=akecan/Project
+      shell: docker-compose -f docker-compose.prod.yml up -d chdir=akecan/Project
+
+- hosts: localhost
+  tasks:
+    - name: trigger a build
+      uri:
+        url: "http://admin:1155ac0b9272d1d51f6f97aa7e12d50c99@localhost:9090/job/Post%20deployment%20check/build?token=MMdYebBEmn"
+        method: POST
+        #user: "admin:1155ac0b9272d1d51f6f97aa7e12d50c99" does not work this way, must be in url
+        password: "andrakable1995"
+        force_basic_auth: yes
+        status_code: 201
