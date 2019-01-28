@@ -1,0 +1,15 @@
+---
+- hosts: linuxvm  
+  remote_user: akecan
+  tasks:  
+    - name: pull from github
+      git: 
+        repo: https://github.com/akecan/Project.git
+        dest: akecan/Project
+        version: "{{var}}"
+
+    - name: docker compose
+      shell: |
+        docker-compose -f docker-compose.prod.yml down
+        docker-compose -f docker-compose.prod.yml build  
+        docker-compose -f docker-compose.prod.yml up -d chdir=akecan/Project
