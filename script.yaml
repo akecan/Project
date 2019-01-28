@@ -6,7 +6,6 @@
       git: 
         repo: https://github.com/akecan/Project.git
         dest: akecan/Project
-        version: "{{var}}"
 
     - name: docker compose
       shell: |
