@@ -125,7 +125,7 @@ resource "azurerm_virtual_machine_extension" "mydockerextension" {
 
     //"fileUris": ["/home/andreja/Desktop/hello.sh"],
     //url for script to be downloaded-git repo
-    //komanda da se izvrsi skripta
+    //command to execute script
     settings = <<SETTINGS
     {
         
