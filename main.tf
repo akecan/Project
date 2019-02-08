@@ -39,10 +39,7 @@ resource "azurerm_public_ip" "myterraformpublicip" {
     }
 }
 
-#no network security
-
-#A virtual network interface card (NIC) connects your VM to a given virtual network,
-#public IP address, and network security group.
+#A virtual network interface card (NIC) connects your VM to a given virtual network
 resource "azurerm_network_interface" "myterraformnic" {
     name                = "myNIC"
     location            = "westeurope"
@@ -61,7 +58,6 @@ resource "azurerm_network_interface" "myterraformnic" {
     }
 }
 
-#no storage account for diagnostics
 
 #virtual machine - ubuntu
 resource "azurerm_virtual_machine" "myterraformvm" {
@@ -109,7 +105,7 @@ resource "azurerm_virtual_machine" "myterraformvm" {
     }
 }
 
-#vm extension for docker - deprecated (got stuck here), manualno instalirana novija verzija composea
+#vm extension for docker
 resource "azurerm_virtual_machine_extension" "mydockerextension" {
     name = "DockerExtension"
     location = "westeurope"
